@@ -1,57 +1,86 @@
-import { Component } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+// import { Component } from 'react';
+// import toast, { Toaster } from 'react-hot-toast';
 import s from './Searchbar.module.css';
 
-class Searchbar extends Component {
-    state = {
-        value: '',
-    }
+const Searchbar = ({ onSearch }) => {
 
-
-  handleInputValue = e => {
-        this.setState({ value: e.target.value.toLowerCase()})
-    }
-
-    handleSubmit = (e) => {
-        e.preventDefault();
-        
-        if (this.state.value.trim() === '') {
-            toast.error('Input picture`s name.')
-            return;
-        }
-        this.props.onSubmit(this.state.value);
-        this.resetInput();
-    }
-
-  resetInput = () => {
-    this.setState({ value: '' });
+const handleSearch = e => {
+  e.preventDefault();
+  // console.log(e.target.elements.imageName.value);
+  onSearch(e.target.elements.imageName.value);
 }
 
+  return (
+    <div>
+      <header className={s.Searchbar}>
+        <form className={s.SearchForm} onSubmit={handleSearch}>
+          <button type="submit" className={s.SearchForm_button}>
+            <span className={s.SearchForm_button_label}>Search</span>
+          </button>
 
-  render() {
-    return (
-      <div>
-        <header className={s.Searchbar}>
-          <form className={s.SearchForm} onSubmit={this.handleSubmit}>
-            <button type="submit" className={s.SearchForm_button}>
-              <span className={s.SearchForm_button_label}>Search</span>
-            </button>
+          <input
+            className={s.SearchForm_input}
+            type="text"
+            name='imageName'
+            autoComplete="off"
+            autoFocus
+            placeholder="Search images and photos"
+          />
+          {/* <Toaster /> */}
+        </form>
+      </header>
+    </div>
+  );
+};
 
-            <input
-              className={s.SearchForm_input}
-              type="text"
-              autoComplete="off"
-              autoFocus
-              placeholder="Search images and photos"
-              onChange={this.handleInputValue}
-            />
-           <Toaster/>
+// class Searchbar extends Component {
+//     state = {
+//         value: '',
+//     }
 
-          </form>
-        </header>
-      </div>
-    );
-  }
-}
+//   handleInputValue = e => {
+//         this.setState({ value: e.target.value.toLowerCase()})
+//     }
+
+//   handleSubmit = (e) => {
+//         e.preventDefault();
+
+//         if (this.state.value.trim() === '') {
+//             toast.error('Input picture`s name.')
+//             return;
+//         }
+//         this.props.onSearch(this.state.value);
+//         this.resetInput();
+//     }
+
+//   resetInput = () => {
+//     this.setState({ value: '' });
+// }
+
+//   render() {
+//     return (
+//       <div>
+//         <header className={s.Searchbar}>
+//           <form className={s.SearchForm} onSubmit={this.handleSubmit}>
+//             <button type="submit" className={s.SearchForm_button}>
+//               <span className={s.SearchForm_button_label}>Search</span>
+//             </button>
+
+//             <input
+//               className={s.SearchForm_input}
+//               type="text"
+//               autoComplete="off"
+//               autoFocus
+//               placeholder="Search images and photos"
+//               onChange={this.handleInputValue}
+//             />
+//            <Toaster/>
+
+//           </form>
+//         </header>
+//       </div>
+//     );
+//   }
+// }
 
 export default Searchbar;
