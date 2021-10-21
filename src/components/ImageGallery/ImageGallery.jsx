@@ -6,7 +6,7 @@ function ImageGallery({ images, onSelect }) {
         <ul className={s.ImageGallery}>
             {images && images.map(image => {
                 const { id, webformatURL, tags} = image;
-                return <ImageGalleryItem key={id} src={webformatURL} alt={tags} onClick={() => onSelect(image)} />
+                return <ImageGalleryItem key={id} src={webformatURL} alt={tags} />
             })}
             
         </ul>

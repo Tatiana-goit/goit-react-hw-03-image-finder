@@ -40,8 +40,8 @@ class Searchbar extends Component {
             <input
               className={s.SearchForm_input}
               type="text"
-              autocomplete="off"
-              autofocus
+              autoComplete="off"
+              autoFocus
               placeholder="Search images and photos"
               onChange={this.handleInputValue}
             />

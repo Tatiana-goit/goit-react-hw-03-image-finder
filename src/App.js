@@ -66,7 +66,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Searchbar onClick={this.searchbarInputValueHandler} />
+        <Searchbar onSubmit={this.searchbarInputValueHandler} />
         <Toaster />
         <ImageGallery images={this.state.images} onSelect={this.handleSelectImage}/>
 
