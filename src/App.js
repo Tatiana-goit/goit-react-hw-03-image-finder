@@ -125,8 +125,11 @@ class App extends Component {
   };
 
   handleLoadMoreBtnClick = () => {
-    this.setState({status: Status.PENDING})
-  }
+    this.setState(prevState => ({
+        page: prevState.page + 1,
+        status: Status.PENDING,
+    }))
+}
 
   render() {
     const { images, status, showModal, selectedImage} = this.state;
