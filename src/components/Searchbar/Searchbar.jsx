@@ -1,4 +1,4 @@
-// import { Component } from 'react';
+// import {Component} from 'react';
 // import toast, { Toaster } from 'react-hot-toast';
 import s from './Searchbar.module.css';
 
@@ -6,7 +6,6 @@ const Searchbar = ({ onSearch }) => {
 
 const handleSearch = e => {
   e.preventDefault();
-  // console.log(e.target.elements.imageName.value);
   onSearch(e.target.elements.imageName.value);
   e.target.elements.imageName.value = ''
 }
@@ -27,7 +26,6 @@ const handleSearch = e => {
             autoFocus
             placeholder="Search images and photos"
           />
-          {/* <Toaster /> */}
         </form>
       </header>
     </div>

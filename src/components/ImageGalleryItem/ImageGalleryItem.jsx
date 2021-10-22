@@ -1,12 +1,16 @@
-import s from './ImageGalleryItem.module.css'
+import s from './ImageGalleryItem.module.css';
 
-function ImageGalleryItem({ id, src, alt }) {
-    return (
-        <li key={id} className={s.ImageGalleryItem}>
-          <img src={src} alt={alt} className={s.ImageGalleryItem_image} />
-        </li>
-    )
-
+function ImageGalleryItem({ id,  src, alt, image, onClickModal }) {
+  return (
+    <li key={id} className={s.ImageGalleryItem}>
+      <img 
+        className={s.ImageGalleryItem_image}
+        src={src}
+        alt={alt}
+        onClick={() => {onClickModal(image);}}
+      />
+    </li>
+  );
 }
 
 export default ImageGalleryItem;
