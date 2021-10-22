@@ -1,5 +1,5 @@
 @import 'modern-normalize/modern-normalize.css';
-
+@import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 html {
   box-sizing: border-box;
   width: 100vw;

@@ -1,9 +1,9 @@
 import s from './ImageGalleryItem.module.css'
 
-function ImageGalleryItem({ id, src, alt, onClick }) {
+function ImageGalleryItem({ id, src, alt }) {
     return (
-        <li className={s.ImageGalleryItem}>
-          <img key={id} src={src} alt={alt} className={s.ImageGalleryItem_image} />
+        <li key={id} className={s.ImageGalleryItem}>
+          <img src={src} alt={alt} className={s.ImageGalleryItem_image} />
         </li>
     )
 

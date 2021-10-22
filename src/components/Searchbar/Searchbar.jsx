@@ -8,6 +8,7 @@ const handleSearch = e => {
   e.preventDefault();
   // console.log(e.target.elements.imageName.value);
   onSearch(e.target.elements.imageName.value);
+  e.target.elements.imageName.value = ''
 }
 
   return (

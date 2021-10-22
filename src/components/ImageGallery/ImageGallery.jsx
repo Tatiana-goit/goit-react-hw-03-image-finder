@@ -1,16 +1,31 @@
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 import s from './ImageGallery.module.css';
 
-function ImageGallery({ images, onSelect }) {
+
+const ImageGallery = ({images}) => {
     return (
         <ul className={s.ImageGallery}>
-            {images && images.map(image => {
+            {images.map(image => {
                 const { id, webformatURL, tags} = image;
-                return <ImageGalleryItem key={id} src={webformatURL} alt={tags} />
-            })}
-            
+                return (
+                    <ImageGalleryItem key={id} src={webformatURL} alt={tags}/>
+            )})}
         </ul>
-    );
-};
+
+    )
+
+}
+
+// function ImageGallery({ images, onSelect }) {
+//     return (
+//         <ul className={s.ImageGallery}>
+//             {images && images.map(image => {
+//                 const { id, webformatURL, tags} = image;
+//                 return <ImageGalleryItem key={id} src={webformatURL} alt={tags} />
+//             })}
+            
+//         </ul>
+//     );
+// };
 
 export default ImageGallery;

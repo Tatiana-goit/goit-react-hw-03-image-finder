@@ -1,12 +1,14 @@
 import './App.css';
 import { Component } from 'react';
-// import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
+import Loader from "react-loader-spinner";
 import Searchbar from './components/Searchbar/Searchbar';
-// import ImageGallery from './components/ImageGallery/ImageGallery';
-import axios from 'axios';
+import ImageGallery from './components/ImageGallery/ImageGallery';
 // import Modal from './components/Modal/Modal';
 // import Button from './components/Button/Button';
 // import api from './services/gallery-api';
+// import Loader from './components/Loader/Loader'
+import fetchImages from './services/gallery-api';
 
 const Status = {
   IDLE: 'idle',
@@ -14,6 +16,9 @@ const Status = {
   RESOLVED: 'resolved',
   REJECTED: 'rejected',
 };
+
+
+
 
 class App extends Component {
   state = {
@@ -26,14 +31,30 @@ class App extends Component {
 }
 
 
+
+
 async componentDidUpdate(prevProps, prevState) {
-    const API_KEY = '21768835-de3419a52772d349dcef7b4fc';
-    if (prevState.imageName !== this.state.imageName) {
-      
-      const {data}= await axios.get( `https://pixabay.com/api/?q=${this.state.imageName}&page=${1}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`)
-      console.log(data.hits);
-      this.setState({images: data.hits})
+  const {imageName} =this.state;
+
+   if (prevState.imageName !== imageName) {
+     try {
+      const images = await fetchImages(imageName)
+
+      if (images.length === 0) {
+        toast.error(`Oops, we did not find such picture as ${imageName}`);
+      }
+      this.setState({status: Status.RESOLVED});
+      this.setState({images});
      }
+     catch (error) {
+       this.setState({status: Status.REJECTED});
+       console.log("ErRoR", error);
+     }}
+
+     window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth',
+    });
   }
   
 
@@ -56,21 +77,33 @@ async componentDidUpdate(prevProps, prevState) {
   // }
 
   handleFormSubmit = imageName => {
-    this.setState({imageName})
+    this.setState({imageName});
+    this.setState({status: Status.PENDING})
   }
 
    
 
   handleSelectImage = data => {
-    this.setState({ selectedImage: data, });  
+    this.setState({ selectedImage: data, }); 
 }
 
   render() {
+    const {images,status} = this.state;
+    const {handleFormSubmit} = this
     return (
       <div className="App">
-        <Searchbar onSearch={this.handleFormSubmit} />
-        {/* <Toaster /> */}
-        {/* <ImageGallery images={this.state.images} onSelect={this.handleSelectImage}/> */}
+        <Searchbar onSearch={handleFormSubmit} />
+        <Toaster position="top-right" />
+        <ImageGallery images={images}/>
+
+        {status === Status.PENDING && <Loader 
+              className="Loader"
+              type="Circles"
+              color="#00BFFF"
+              height={150}
+              width={150}
+              timeout={3000}
+        />}
 
       </div>
     );
