@@ -1,13 +1,14 @@
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
+import PropTypes from 'prop-types';
 import s from './ImageGallery.module.css';
 
-const ImageGallery = ({ images, onModal }) => {
+export default function ImageGallery({ images, onModal }) {
   return (
     <ul className={s.ImageGallery}>
       {images.map(image => {
         return (
           <ImageGalleryItem
-            id={image.id}
+            key={image.id} 
             src={image.webformatURL}
             alt={image.tags}
             image={image}
@@ -17,18 +18,16 @@ const ImageGallery = ({ images, onModal }) => {
       })}
     </ul>
   );
+}
+
+ImageGallery.propTypes = {
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      src: PropTypes.string,
+      alt: PropTypes.string,
+      image: PropTypes.node,
+    }),
+  ),
+  onModal: PropTypes.func.isRequired,
 };
-
-// function ImageGallery({ images, onSelect }) {
-//     return (
-//         <ul className={s.ImageGallery}>
-//             {images && images.map(image => {
-//                 const { id, webformatURL, tags} = image;
-//                 return <ImageGalleryItem key={id} src={webformatURL} alt={tags} />
-//             })}
-
-//         </ul>
-//     );
-// };
-
-export default ImageGallery;
