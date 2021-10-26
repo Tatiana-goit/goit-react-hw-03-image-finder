@@ -26,7 +26,7 @@ ImageGallery.propTypes = {
       id: PropTypes.number.isRequired,
       src: PropTypes.string,
       alt: PropTypes.string,
-      image: PropTypes.node,
+      image: PropTypes.array
     }),
   ),
   onModal: PropTypes.func.isRequired,
